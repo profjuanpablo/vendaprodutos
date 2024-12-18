@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Vendedores</title>
+</head>
+<body>
+
+<h1>Lista de Vendedores</h1>
+
+<a href="/vendedores/novo">Novo Vendedor</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="vendedor : ${vendedores}">
+            <td th:text="${vendedor.id}"></td>
+            <td th:text="${vendedor.nome}"></td>
+            <td>
+                <a th:href="@{'/vendedores/editar/' + ${vendedor.id}}">Editar</a>
+                <a th:href="@{'/vendedores/deletar/' + ${vendedor.id}}">Deletar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

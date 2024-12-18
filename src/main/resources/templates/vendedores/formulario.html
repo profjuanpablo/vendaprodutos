@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Vendedor</title>
+</head>
+<body>
+
+<h1 th:text="${vendedor.id == null} ? 'Novo Vendedor' : 'Editar Vendedor'"></h1>
+
+<form th:action="@{/vendedores/salvar}" th:object="${vendedor}" method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" th:field="*{nome}" />
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a href="/vendedores">Voltar</a>
+
+</body>
+</html>

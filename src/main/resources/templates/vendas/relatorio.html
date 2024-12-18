@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Relatório de Vendas</title>
+</head>
+<body>
+
+<h1>Relatório de Vendas</h1>
+
+<!-- Formulário de Filtro -->
+<form method="get" action="/vendas">
+    <label for="produtoId">Produto:</label>
+    <select name="produtoId" id="produtoId">
+        <option value="">Todos</option>
+        <option th:each="produto : ${produtos}" 
+                th:value="${produto.id}" 
+                th:text="${produto.nome}"></option>
+    </select>
+
+    <label for="vendedorId">Vendedor:</label>
+    <select name="vendedorId" id="vendedorId">
+        <option value="">Todos</option>
+        <option th:each="vendedor : ${vendedores}" 
+                th:value="${vendedor.id}" 
+                th:text="${vendedor.nome}"></option>
+    </select>
+
+    <label for="dataInicio">Data Início:</label>
+    <input type="date" name="dataInicio" id="dataInicio">
+
+    <label for="dataFim">Data Fim:</label>
+    <input type="date" name="dataFim" id="dataFim">
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<!-- Tabela de Vendas -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Vendedor</th>
+            <th>Quantidade Vendida</th>
+            <th>Data da Venda</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="venda : ${vendas}">
+            <td th:text="${venda.id}"></td>
+            <td th:text="${venda.produto.nome}"></td>
+            <td th:text="${venda.vendedor.nome}"></td>
+            <td th:text="${venda.quantidadeVendida}"></td>
+            <td th:text="${#dates.format(venda.dataVenda, 'yyyy-MM-dd')}"></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
